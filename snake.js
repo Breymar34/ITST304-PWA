@@ -1,4 +1,4 @@
-var canvas = document.getElementById("canvas");
+/*var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 var blockSize = 10;
 var width = canvas.width / blockSize;
@@ -83,4 +83,4 @@ function gameLoop() {
 }
 
 document.addEventListener("keydown", changeDirection);
-intervalId = setInterval(gameLoop, 500);
+intervalId = setInterval(gameLoop, 500);*/

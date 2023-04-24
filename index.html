@@ -1,27 +1,89 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>ITST 304</title>
-  <link rel="manifest" href="/manifest.json">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="images/logo-ccs-60.png" type="image/x-icon" />
-  <link rel="apple-touch-icon" href="images/logo-ccs-60.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="white"/>
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="ITST 304">
-  <meta name="msapplication-TileImage" content="images/logo-ccs-90.png">
-  <meta name="msapplication-TileColor" content="#FFFFFF">
+  <title>Catch the Ball Game</title>
+  <style>
+    #game-board {
+      width: 500px;
+      height: 500px;
+      border: 1px solid black;
+      position: relative;
+    }
+    
+    .ball {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: red;
+      animation: move 2s linear infinite;
+    }
+    
+    @keyframes move {
+      0% {
+        top: 0;
+        left: 0;
+      }
+      100% {
+        top: 450px;
+        left: 450px;
+      }
+    }
+  </style>
 </head>
-<body class="fullscreen">
-  <div class="container">
-    <h1 class="title">ITST 304</h1>
-    <p>I love PWA Programming! =)</p>
-    <canvas id="canvas" style="height: 400px;width:300;border: 1px solid;"></canvas>
-    <script src="snake.js"></script>
+<body>
+  <div id="game-board">
   </div>
-  <script src="js/main.js"></script>
+
+  <script>
+    let score = 0;
+    let timeLeft = 30;
+    
+    const gameBoard = document.querySelector('#game-board');
+    
+    function createBall() {
+      const ball = document.createElement('div');
+      ball.classList.add('ball');
+      
+      ball.addEventListener('click', () => {
+        ball.remove();
+        score++;
+        document.querySelector('#score').textContent = score;
+      });
+      
+      const x = Math.floor(Math.random() * 450);
+      const y = Math.floor(Math.random() * 450);
+      
+      ball.style.top = `${y}px`;
+      ball.style.left = `${x}px`;
+      
+      gameBoard.append(ball);
+    }
+    
+    setInterval(() => {
+      if (timeLeft === 0) {
+        alert(`Game over! Your score is ${score}.`);
+        clearInterval(intervalId);
+      } else {
+        createBall();
+        timeLeft--;
+        document.querySelector('#time-left').textContent = timeLeft;
+      }
+    }, 1000);
+    
+    const intervalId = setInterval(() => {
+      createBall();
+    }, 1000);
+  </script>
+  
+  <div>
+    <span>Score: </span><span id="score">0</span>
+  </div>
+  <div>
+    <span>Time left: </span><span id="time-left">30</span>
+  </div>
+  
 </body>
 </html>
