@@ -1,23 +1,42 @@
 body {
-  font-family: sans-serif;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  color: #000;
 }
 
-/* Make content area fill the entire browser window */
-html,
-.fullscreen {
-  display: flex;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
-
-/* Center the content in the browser window */
-.container {
-  margin: auto;
+#game {
+  max-width: 800px;
+  margin: 0 auto;
   text-align: center;
 }
 
-.title {
-  font-size: 3rem;
+#moles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hole {
+  width: 150px;
+  height: 150px;
+  margin: 10px;
+  background-image: url('mole.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.hole.up {
+  opacity: 1;
+}
+
+#score {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+p {
+  margin: 0;
 }
